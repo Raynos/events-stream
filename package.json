@@ -1,0 +1,35 @@
+{
+  "name": "events-stream",
+  "version": "0.0.1",
+  "description": "A stream of DOM events",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Raynos/events-stream.git",
+  "main": "index",
+  "homepage": "https://github.com/Raynos/events-stream",
+  "contributors": [
+    {
+      "name": "Jake Verbaten"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Raynos/events-stream/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "read-stream": "~0.2.0"
+  },
+  "devDependencies": {
+    "browserify-server": "~1.2.2",
+    "write-stream": "~0.1.0",
+    "lazy-map-stream": "~0.1.0",
+    "lazy-filter-stream": "0.0.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Raynos/events-stream/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {}
+}
