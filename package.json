@@ -17,13 +17,13 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "read-stream": "~0.2.0"
+    "read-stream": "~0.4.7"
   },
   "devDependencies": {
     "browserify-server": "~1.2.2",
-    "write-stream": "~0.1.0",
-    "lazy-map-stream": "~0.1.0",
-    "lazy-filter-stream": "0.0.1"
+    "write-stream": "~0.1.1",
+    "lazy-map-stream": "~0.1.1",
+    "lazy-filter-stream": "~0.0.2"
   },
   "licenses": [
     {
