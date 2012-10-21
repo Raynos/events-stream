@@ -1,4 +1,4 @@
-var from = require("read-stream")
+var ReadStream = require("read-stream")
 
 module.exports = events
 
@@ -15,59 +15,31 @@ function DOMEvents(elem, eventName, capture) {
         capture = false
     }
 
-    var buffer = []
-        , stream = from(read, end, buffer)
+    var queue = ReadStream()
+        , stream = queue.stream
 
-    elem.addEventListener(eventName, addToBuffer, capture)
+    elem.addEventListener(eventName, queue.push, capture)
+
+    stream.close = _close
 
     return stream
 
-    function end() {
-        elem.removeEventListener(eventName, addToBuffer, capture)
-        stream.emit("end")
-    }
-
-    function addToBuffer(event) {
-        buffer.push(event)
-        if (buffer.length === 1) {
-            stream.emit("readable")
-        }
+    function _close() {
+        elem.removeEventListener(eventName, queue.push, capture)
     }
 }
 
 function EEEvents(ee, eventName) {
-    var buffer = []
-        , stream = from(read, end, buffer)
+    var queue = ReadStream()
+        , stream = queue.stream
 
-    ee.on(eventName, addToBuffer)
+    ee.on(eventName, queue.push)
+
+    stream.close = _close
 
     return stream
 
-    function end() {
-        ee.removeListener(eventName, addToBuffer)
-        stream.emit("end")
+    function _close() {
+        ee.removeListener(eventName, queue.push)
     }
-
-    function addToBuffer() {
-        if (arguments.length === 1) {
-            buffer.push(arguments[0])
-        } else {
-            buffer.push(toArray(arguments))
-        }
-        if (buffer.length === 1) {
-            stream.emit("readable")
-        }
-    }
-}
-
-function read(bytes, buffer) {
-    return buffer.shift()
-}
-
-function toArray(list) {
-    var array = []
-    for (var i = 0; i < list.length; i++) {
-        array[i] = list[i]
-    }
-    return array
 }
